@@ -1,9 +1,11 @@
 import React from 'react';
 
 const Home = () => (
-    <div className="jumbotron">
-        <h2>Home</h2>
-        <p className="lead">Welcome to React Frontend</p>
+    <div className='container'>
+      <div className='jumbotron'>
+        <h2>DevLife</h2>
+        <p className='lead'>A healthy social network for developers</p>
+      </div>
     </div>
 );
 
