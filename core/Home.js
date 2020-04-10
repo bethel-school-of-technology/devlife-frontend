@@ -14,7 +14,8 @@ const Home = () => (
     </div>
     <div className="container">
       <Events />
-    </div>  </div>
+    </div>  
+  </div>
 );
 
 export default Home;
