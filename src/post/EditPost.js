@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { singlePost, update } from "./apiPost";
 import { isAuthenticated } from "../auth";
 import { Redirect } from "react-router-dom";
-import DefaultPost from "../images/test2.jpg";
+import DefaultPost from "../images/mountains.jpg";
 
 class EditPost extends Component {
     constructor() {
@@ -157,15 +157,15 @@ class EditPost extends Component {
                         <h2>Loading...</h2>
                     </div>
                 ) : (
-                    ""
-                )}
+                        ""
+                    )}
 
                 <img
-                    style={{ height: "200px", width: "auto" }}
+                    style={{ height: "auto", width: "auto" }}
                     className="img-thumbnail"
                     src={`${
                         process.env.REACT_APP_API_URL
-                    }/post/photo/${id}?${new Date().getTime()}`}
+                        }/post/photo/${id}?${new Date().getTime()}`}
                     onError={i => (i.target.src = `${DefaultPost}`)}
                     alt={title}
                 />

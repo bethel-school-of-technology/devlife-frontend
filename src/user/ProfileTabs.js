@@ -10,7 +10,7 @@ class ProfileTabs extends Component {
                 <div className="row">
                     <div className="col-md-4">
                         <h3 className="text-primary">
-                            Followers
+                            {followers.length} Followers
                         </h3>
                         <hr />
                         {followers.map((person, i) => (
@@ -30,7 +30,7 @@ class ProfileTabs extends Component {
                                             }
                                             src={`${
                                                 process.env.REACT_APP_API_URL
-                                                }/user/photo/${person._id}`}
+                                            }/user/photo/${person._id}`}
                                             alt={person.name}
                                         />
                                         <div>
@@ -46,7 +46,7 @@ class ProfileTabs extends Component {
 
                     <div className="col-md-4">
                         <h3 className="text-primary">
-                            Following
+                            {following.length} Following
                         </h3>
                         <hr />
                         {following.map((person, i) => (
@@ -66,7 +66,7 @@ class ProfileTabs extends Component {
                                             }
                                             src={`${
                                                 process.env.REACT_APP_API_URL
-                                                }/user/photo/${person._id}`}
+                                            }/user/photo/${person._id}`}
                                             alt={person.name}
                                         />
                                         <div>
@@ -81,24 +81,22 @@ class ProfileTabs extends Component {
                     </div>
 
                     <div className="col-md-4">
-                        <h3 className="text-primary">Posts</h3>
+                        <h3 className="text-primary">{posts.length} Posts</h3>
                         <hr />
                         {posts.map((post, i) => (
                             <div key={i}>
                                 <div>
-                                    <Link to={`/user/${post._id}`}>
+                                    <Link to={`/post/${post._id}`}>
                                         <div>
-                                            <p className="lead">
-                                                {post.title}
-                                            </p>
+                                            <p className="lead">{post.title}</p>
                                         </div>
                                     </Link>
                                 </div>
                             </div>
                         ))}
                     </div>
-                </div >
-            </div >
+                </div>
+            </div>
         );
     }
 }
