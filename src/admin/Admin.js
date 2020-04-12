@@ -20,29 +20,29 @@ class Admin extends Component {
             return <Redirect to="/" />;
         }
 
-        return (
+       return (
             <div>
-                <div className='container'>                    
+                <div className='container'>
                     <div className="jumbotron">
-                        <h2>Admin Dashboard</h2>
-                        <p className="lead">Welcome to React Frontend</p>
+                        <h2>Admin</h2>
+                        <p className="lead">Edit or delete if you dare!</p>
                     </div>
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-md-6">
-                                <h2>Posts</h2>
+                                {/* <h2>Posts</h2> */}
                                 <hr />
                                 <Posts />
                             </div>
                             <div className="col-md-6">
-                                <h2>Users</h2>
+                                {/* <h2>Users</h2> */}
                                 <hr />
                                 <Users />
                             </div>
                         </div>
                     </div>
-                </div
-            </div>
+                </div>
+            </div >
         );
     }
 }
