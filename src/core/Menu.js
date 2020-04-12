@@ -9,47 +9,24 @@ const isActive = (history, path) => {
 
 const Menu = ({ history }) => (
   <div>
-    <ul className='nav nav-tabs bg-primary'>
+    <ul className='navbar nav navbar-expand-lg navbar-dark bg-primary'>
       <li className='nav-item'>
         <Link className='nav-link' style={isActive(history, "/")} to='/'>
           Home
         </Link>
       </li>
 
-      <li className='nav-item'>
-        <Link
-          className={
-            history.location.pathname === "/users"
-              ? "active nav-link"
-              : "not-active nav-link"
-          }
-          to='/users'
-        >
-          Users
-        </Link>
-      </li>
-
-      <li className='nav-item'>
-        <Link
-          to={`/post/create`}
-          style={isActive(history, `/post/create`)}
-          className='nav-link'
-        >
-          Create Post
-        </Link>
-      </li>
-      <li className='nav-item'>
-        <Link
-          to={`/event/create`}
-          style={isActive(history, `/event/create`)}
-          className='nav-link'
-        >
-          Create Event
-        </Link>
-      </li>
-
       {!isAuthenticated() && (
         <React.Fragment>
+          <li className='nav-item'>
+            <Link
+              className='nav-link'
+              style={isActive(history, "/users")}
+              to='/users'
+            >
+              Users
+            </Link>
+          </li>
           <li className='nav-item'>
             <Link
               className='nav-link'
@@ -94,14 +71,31 @@ const Menu = ({ history }) => (
               Find People
             </Link>
           </li>
-
+          <li className='nav-item'>
+            <Link
+              to={`/post/create`}
+              style={isActive(history, `/post/create`)}
+              className='nav-link'
+            >
+              Create Post
+            </Link>
+          </li>
+          <li className='nav-item'>
+            <Link
+              to={`/event/create`}
+              style={isActive(history, `/event/create`)}
+              className='nav-link'
+            >
+              Create Event
+            </Link>
+          </li>
           <li className='nav-item'>
             <Link
               to={`/user/${isAuthenticated().user._id}`}
               style={isActive(history, `/user/${isAuthenticated().user._id}`)}
               className='nav-link'
             >
-              {`${isAuthenticated().user.name}'s profile`}
+              {`${isAuthenticated().user.name}'s Profile`}
             </Link>
           </li>
 

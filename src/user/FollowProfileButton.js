@@ -5,6 +5,7 @@ class FollowProfileButton extends Component {
     followClick = () => {
         this.props.onButtonClick(follow);
     };
+
     unfollowClick = () => {
         this.props.onButtonClick(unfollow);
     };
@@ -12,9 +13,7 @@ class FollowProfileButton extends Component {
     render() {
         return (
             <div className="d-inline-block">
-            {
-                !this.props.following ?
-                (
+                {!this.props.following ? (
                     <button
                         onClick={this.followClick}
                         className="btn btn-success btn-raised mr-5"
@@ -22,14 +21,13 @@ class FollowProfileButton extends Component {
                         Follow
                     </button>
                 ) : (
-                    <button 
-                        onClick={this.unfollowClick} 
-                        className="btn btn-warning btn-raised">
+                    <button
+                        onClick={this.unfollowClick}
+                        className="btn btn-warning btn-raised"
+                    >
                         UnFollow
-                
-                </button> 
-                )
-            } 
+                    </button>
+                )}
             </div>
         );
     }

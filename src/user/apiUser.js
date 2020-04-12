@@ -1,4 +1,4 @@
-export const read =(userId, token) => {
+export const read = (userId, token) => {
     return fetch(`${process.env.REACT_APP_API_URL}/user/${userId}`, {
         method: "GET",
         headers: {
@@ -13,7 +13,8 @@ export const read =(userId, token) => {
         .catch(err => console.log(err));
 };
 
-export const update =(userId, token, user) => {
+export const update = (userId, token, user) => {
+    console.log("USER DATA UPDATE: ", user);
     return fetch(`${process.env.REACT_APP_API_URL}/user/${userId}`, {
         method: "PUT",
         headers: {
@@ -28,18 +29,7 @@ export const update =(userId, token, user) => {
         .catch(err => console.log(err));
 };
 
-export const updateUser =(user, next) => {
-    if (typeof window !== "undefined") {
-        if (localStorage.getItem("jwt")) {
-            let auth = JSON.parse(localStorage.getItem("jwt"));
-            auth.user = user;
-            localStorage.setItem("jwt", JSON.stringify(auth));
-            next();
-        }
-    }
-};
-
-export const remove =(userId, token) => {
+export const remove = (userId, token) => {
     return fetch(`${process.env.REACT_APP_API_URL}/user/${userId}`, {
         method: "DELETE",
         headers: {
@@ -54,7 +44,7 @@ export const remove =(userId, token) => {
         .catch(err => console.log(err));
 };
 
-export const list =() => {
+export const list = () => {
     return fetch(`${process.env.REACT_APP_API_URL}/users`, {
         method: "GET"
     })
@@ -62,6 +52,17 @@ export const list =() => {
             return response.json();
         })
         .catch(err => console.log(err));
+};
+
+export const updateUser = (user, next) => {
+    if (typeof window !== "undefined") {
+        if (localStorage.getItem("jwt")) {
+            let auth = JSON.parse(localStorage.getItem("jwt"));
+            auth.user = user;
+            localStorage.setItem("jwt", JSON.stringify(auth));
+            next();
+        }
+    }
 };
 
 export const follow = (userId, token, followId) => {

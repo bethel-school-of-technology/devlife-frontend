@@ -12,7 +12,7 @@ class Events extends Component {
     };
   }
 
-  loadPosts = page => {
+  loadEvents = page => {
     list(page).then(data => {
       if (data.error) {
         console.log(data.error);
@@ -43,25 +43,25 @@ class Events extends Component {
           const posterName = event.postedBy ? event.postedBy.name : " Unknown";
 
           return (
-            <div className='card col-md-4' key={i}>
+            <div className='card bg-light col-md-4' key={i}>
               <div className='card-body'>
                 <img
                   src={`${process.env.REACT_APP_API_URL}/event/photo/${event._id}`}
                   alt={event.title}
                   onError={i => (i.target.src = `${DefaultEvent}`)}
                   className='img-thunbnail mb-3'
-                  style={{ height: "200px", width: "100%" }}
+                  style={{ height: "auto", width: "100%" }}
                 />
                 <h5 className='card-title'>{event.title}</h5>
                 <p className='card-text'>{event.body.substring(0, 100)}</p>
                 <br />
-                <p className='font-italic mark'>
+                <p className='font-italic'>
                   Posted by <Link to={`${posterId}`}>{posterName} </Link>
                   on {new Date(event.created).toDateString()}
                 </p>
                 <Link
                   to={`/event/${event._id}`}
-                  className='btn btn-raised btn-primary btn-sm'
+                  className='btn btn-raised btn-danger btn-sm'
                 >
                   Read more
                 </Link>

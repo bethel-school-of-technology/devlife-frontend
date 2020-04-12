@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { singleEvent, remove, like, unlike } from "./apiEvent";
-import DefaultEvent from "../images/test2.jpg";
+import DefaultEvent from "../images/mountains.jpg";
 import { Link, Redirect } from "react-router-dom";
 import { isAuthenticated } from "../auth";
-import Comment from "../event/Comment";
+import Comment from "./EventComment";
 
 class SingleEvent extends Component {
   state = {
-    post: "",
+    event: "",
     redirectToHome: false,
     redirectToSignin: false,
     like: false,
@@ -63,7 +63,7 @@ class SingleEvent extends Component {
     });
   };
 
-  deletePost = () => {
+  deleteEvent = () => {
     const eventId = this.props.match.params.eventId;
     const token = isAuthenticated().token;
     remove(eventId, token).then(data => {
@@ -76,9 +76,9 @@ class SingleEvent extends Component {
   };
 
   deleteConfirmed = () => {
-    let answer = window.confirm("Are you sure you want to delete this event?");
+    let answer = window.confirm("Are you sure you want to delete your event?");
     if (answer) {
-      this.deletePost();
+      this.deleteEvent();
     }
   };
 
@@ -96,7 +96,7 @@ class SingleEvent extends Component {
           onError={i => (i.target.src = `${DefaultEvent}`)}
           className='img-thunbnail mb-3'
           style={{
-            height: "300px",
+            height: "auto",
             width: "100%",
             objectFit: "cover"
           }}
@@ -122,7 +122,7 @@ class SingleEvent extends Component {
 
         <p className='card-text'>{event.body}</p>
         <br />
-        <p className='font-italic mark'>
+        <p className='font-italic'>
           Posted by <Link to={`${posterId}`}>{posterName} </Link>
           on {new Date(event.created).toDateString()}
         </p>
@@ -142,7 +142,7 @@ class SingleEvent extends Component {
                 </Link>
                 <button
                   onClick={this.deleteConfirmed}
-                  className='btn btn-raised btn-danger'
+                  className='btn btn-raised btn-danger btn-sm mr-5'
                 >
                   Delete Event
                 </button>
@@ -156,10 +156,10 @@ class SingleEvent extends Component {
                   <h5 className='card-title'>Admin</h5>
                   <p className='mb-2 text-danger'>Edit/Delete as an Admin</p>
                   <Link
-                    to={`/post/edit/${event._id}`}
+                    to={`/event/edit/${event._id}`}
                     className='btn btn-raised btn-warning btn-sm mr-5'
                   >
-                    Update Post
+                    Update Event
                   </Link>
                   <button
                     onClick={this.deleteConfirmed}
@@ -194,7 +194,7 @@ class SingleEvent extends Component {
             <h2>Loading...</h2>
           </div>
         ) : (
-          this.renderPost(event)
+          this.renderEvent(event)
         )}
 
         <Comment
