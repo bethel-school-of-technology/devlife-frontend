@@ -154,7 +154,7 @@ class EditEvent extends Component {
                     className='img-thumbnail'
                     src={`${
                         process.env.REACT_APP_API_URL
-                        }/post/photo/${id}?${new Date().getTime()}`}
+                        }/event/photo/${id}?${new Date().getTime()}`}
                     onError={i => (i.target.src = `${DefaultEvent}`)}
                     alt={title}
                 />
