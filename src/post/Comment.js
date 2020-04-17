@@ -30,7 +30,7 @@ class Comment extends Component {
     e.preventDefault();
 
     if (!isAuthenticated()) {
-      this.setState({ error: "Please signin to leave a comment" });
+      this.setState({ error: "Please sign in to leave a comment" });
       return false;
     }
 

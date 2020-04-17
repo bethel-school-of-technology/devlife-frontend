@@ -13,8 +13,8 @@ export const create = (userId, token, event) => {
         .catch(err => console.log(err));
 };
 
-export const list = () => {
-    return fetch(`${process.env.REACT_APP_API_URL}/events`, {
+export const list = page => {
+    return fetch(`${process.env.REACT_APP_API_URL}/events/?page=${page}`, {
         method: "GET"
     })
         .then(response => {
