@@ -4,11 +4,11 @@ import DefaultProfile from "../images/avatar.jpg";
 
 class ProfileTabs extends Component {
     render() {
-        const { following, followers, posts } = this.props;
+        const { following, followers, posts, events } = this.props;
         return (
             <div>
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <h3 className="text-primary">
                             {followers.length} Followers
                         </h3>
@@ -42,9 +42,11 @@ class ProfileTabs extends Component {
                                 </div>
                             </div>
                         ))}
+                    <br></br>
+
                     </div>
 
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <h3 className="text-primary">
                             {following.length} Following
                         </h3>
@@ -80,7 +82,7 @@ class ProfileTabs extends Component {
                         ))}
                     </div>
 
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <h3 className="text-primary">{posts.length} Posts</h3>
                         <hr />
                         {posts.map((post, i) => (
@@ -89,6 +91,24 @@ class ProfileTabs extends Component {
                                     <Link to={`/post/${post._id}`}>
                                         <div>
                                             <p className="lead">{post.title}</p>
+                                        </div>
+                                    </Link>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <hr />
+                    <br></br>
+
+                    <div className="col-md-3">
+                        <h3 className="text-primary">{events.length} Events</h3>
+                        <hr />
+                        {events.map((event, i) => (
+                            <div key={i}>
+                                <div>
+                                    <Link to={`/event/${event._id}`}>
+                                        <div>
+                                            <p className="lead">{event.title}</p>
                                         </div>
                                     </Link>
                                 </div>

@@ -7,6 +7,7 @@ import DeleteUser from "./DeleteUser";
 import FollowProfileButton from "./FollowProfileButton";
 import ProfileTabs from "./ProfileTabs";
 import { listByUser } from "../post/apiPost";
+import { eventsByUser } from "../event/apiEvent";
 
 class Profile extends Component {
   constructor() {
@@ -16,7 +17,8 @@ class Profile extends Component {
       redirectToSignin: false,
       following: false,
       error: "",
-      posts: []
+      posts: [],
+      events: []
     };
   }
 
@@ -52,6 +54,7 @@ class Profile extends Component {
         let following = this.checkFollow(data);
         this.setState({ user: data, following });
         this.loadPosts(data._id);
+        this.loadEvents(data._id);
       }
     });
   };
@@ -67,6 +70,17 @@ class Profile extends Component {
     });
   };
 
+  loadEvents = userId => {
+    const token = isAuthenticated().token;
+    eventsByUser(userId, token).then(data => {
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        this.setState({ events: data });
+      }
+    });
+  };
+
   componentDidMount() {
     const userId = this.props.match.params.userId;
     this.init(userId);
@@ -78,7 +92,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { redirectToSignin, user, posts } = this.state;
+    const { redirectToSignin, user, posts, events } = this.state;
     if (redirectToSignin) return <Redirect to="/signin" />;
 
     const photoUrl = user._id
@@ -112,18 +126,25 @@ class Profile extends Component {
               isAuthenticated().user._id === user._id ? (
                 <div className="d-inline-block">
                   <Link
-                    className="btn btn-raised btn-info mr-5"
+                    className="btn btn-raised btn-info mr-2"
                     to={`/post/create`}
                   >
                     Create Post
-                </Link>
+                  </Link>
+                  <Link
+                    className="btn btn-raised btn-info mr-2"
+                    to={`/event/create`}
+                  >
+                    Create Event
+                  </Link>
 
                   <Link
-                    className="btn btn-raised btn-success mr-5"
+                    className="btn btn-raised btn-success mr-2"
                     to={`/user/edit/${user._id}`}
                   >
                     Edit Profile
-                </Link>
+                  </Link>
+                  
                   <DeleteUser userId={user._id} />
                 </div>
               ) : (
@@ -165,6 +186,7 @@ class Profile extends Component {
               followers={user.followers}
               following={user.following}
               posts={posts}
+              events={events}
             />
           </div>
         </div>

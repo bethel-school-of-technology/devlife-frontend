@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { comment, uncomment } from "./apiPost";
+import { comment, uncomment } from "./apiEvent";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import DefaultProfile from "../images/avatar.jpg";
@@ -30,16 +30,16 @@ class Comment extends Component {
     e.preventDefault();
 
     if (!isAuthenticated()) {
-      this.setState({ error: "Please sign in to leave a comment" });
+      this.setState({ error: "Please signin to leave a comment" });
       return false;
     }
 
     if (this.isValid()) {
       const userId = isAuthenticated().user._id;
       const token = isAuthenticated().token;
-      const postId = this.props.postId;
+      const eventId = this.props.eventId;
 
-      comment(userId, token, postId, { text: this.state.text }).then(data => {
+      comment(userId, token, eventId, { text: this.state.text }).then(data => {
         if (data.error) {
           console.log(data.error);
         } else {
@@ -54,9 +54,9 @@ class Comment extends Component {
   deleteComment = comment => {
     const userId = isAuthenticated().user._id;
     const token = isAuthenticated().token;
-    const postId = this.props.postId;
+    const eventId = this.props.eventId;
 
-    uncomment(userId, token, postId, comment).then(data => {
+    uncomment(userId, token, eventId, comment).then(data => {
       if (data.error) {
         console.log(data.error);
       } else {
